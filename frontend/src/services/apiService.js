@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000'; 
+const API_URL = 'https://powerbugfinal.onrender.com'; 
 
 /**
  * @param {File} imageFile 
@@ -13,7 +13,7 @@ export const analyzeImage = (imageFile) => {
   console.log('API servisi: Resim backend\'e gönderiliyor...');
 
   // POST isteği
-  return axios.post(`${API_URL}/analyze-question`, formData, {
+  return axios.post(`${API_URL}/teach/question`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -25,7 +25,7 @@ export const analyzeImage = (imageFile) => {
 export const analyzeTextInteraction = (transcript, history) => {
   console.log('API\'ye gönderiliyor: sadece metin ve sohbet geçmişi');
   // Backend'ci arkadaşınla endpoint adı ve veri yapısı konusunda anlaş:
-  return axios.post(`${API_URL}/analyze-text`, {
+  return axios.post(`${API_URL}/teach/text`, {
     transcript: transcript,
     history: history,
   });
@@ -46,7 +46,7 @@ export const analyzeInteraction = (videoBlob, history) => {
   console.log('API ye gönderiliyor: video ve sohbet geçmişi');
   
   //endpoint adını teyit et.
-  return axios.post(`${API_URL}/analyze-video`, formData, {
+  return axios.post(`${API_URL}/teach/video`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
