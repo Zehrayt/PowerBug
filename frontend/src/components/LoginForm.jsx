@@ -16,12 +16,13 @@ function LoginForm() {
     try {
       // Backend'e giriş isteği gönderiyoruz
       const response = await loginUser({ email, password });
-
-      // Backend'den başarılı bir cevap geldiyse...
-      console.log('Giriş başarılı:', response.data);
+      if (response.data && response.data.user_id) {
+        localStorage.setItem('powerbug_user_id', response.data.user_id);
+        navigate('/welcome'); 
+      } else {
+        setError("Giriş yapılamadı, sunucudan beklenmedik cevap.");
+      }
       
-      // Giriş başarılı olduğu için kullanıcıyı yönlendir
-      navigate('/welcome');
 
     } catch (err) {
       // Eğer bir hata olursa (örn: şifre yanlış)
