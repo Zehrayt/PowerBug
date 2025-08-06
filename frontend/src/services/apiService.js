@@ -68,6 +68,15 @@ export const registerUser = (userData) => {
  * @param {object} credentials - { email, password } içeren nesne.
  * @returns {Promise<any>}
  */
-export const loginUser = (credentials) => {
-  return axios.post(`${API_URL}/auth/login`, credentials);
+export const loginUser = async ({ username, password }) => {
+  const params = new URLSearchParams();
+  params.append('username', username);
+  params.append('password', password);
+
+  return await axios.post(`${API_URL}/auth/login`, params, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    withCredentials: true, 
+  });
 };

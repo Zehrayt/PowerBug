@@ -15,7 +15,7 @@ function LoginForm() {
 
     try {
       // Backend'e giriş isteği gönderiyoruz
-      const response = await loginUser({ email, password });
+      const response = await loginUser({ username: email, password });
       if (response.data && response.data.user_id) {
         localStorage.setItem('powerbug_user_id', response.data.user_id);
         navigate('/welcome'); 
@@ -38,8 +38,8 @@ function LoginForm() {
         {error && <p className="error-message">{error}</p>}
         <div className="input-box">
           <input 
-            type="email" 
-            placeholder="E-posta" 
+            type="text" 
+            placeholder="İsim" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
             required 
